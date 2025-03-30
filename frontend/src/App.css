@@ -1,38 +1,262 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f8f9fa;
+  margin: 0;
+  padding: 0;
+}
+
 .App {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #dee2e6;
+}
+
+h1 {
+  margin: 0;
+  color: #343a40;
+}
+
+h2 {
+  color: #495057;
+  margin-top: 0;
+}
+
+h3 {
+  color: #6c757d;
+  margin-bottom: 10px;
+}
+
+.api-status {
+  padding: 5px 10px;
+  border-radius: 4px;
+  background-color: #e9ecef;
+  font-size: 14px;
+}
+
+.api-status.synthetic {
+  background-color: #ffc107;
+  color: #212529;
+}
+
+.refresh-button {
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.refresh-button:hover {
+  background-color: #0069d9;
+}
+
+.loading,
+.error {
   text-align: center;
+  padding: 40px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin: 20px 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.error {
+  color: #dc3545;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.sentiment-section {
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.sentiment-chart {
   display: flex;
   flex-direction: column;
+  gap: 15px;
+}
+
+.sentiment-bar {
+  display: flex;
+  height: 40px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.calls-bar {
+  background-color: #28a745;
+  color: white;
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  font-weight: bold;
+}
+
+.puts-bar {
+  background-color: #dc3545;
   color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
 }
 
-.App-link {
-  color: #61dafb;
+.ticker-lists {
+  display: flex;
+  justify-content: space-between;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.bullish-tickers,
+.bearish-tickers {
+  flex: 1;
+  padding: 10px;
+}
+
+.bullish-tickers h3 {
+  color: #28a745;
+}
+
+.bearish-tickers h3 {
+  color: #dc3545;
+}
+
+.bullish-tickers ul,
+.bearish-tickers ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.bullish-tickers li,
+.bearish-tickers li {
+  padding: 8px 0;
+  border-bottom: 1px solid #e9ecef;
+  cursor: pointer;
+}
+
+.bullish-tickers li:hover,
+.bearish-tickers li:hover {
+  background-color: #f8f9fa;
+}
+
+.ticker-detail {
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.ticker-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #6c757d;
+}
+
+.ticker-options {
+  margin-top: 20px;
+}
+
+.main-table {
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  text-align: left;
+  padding: 12px 8px;
+  background-color: #f8f9fa;
+  color: #495057;
+  border-bottom: 2px solid #dee2e6;
+}
+
+td {
+  padding: 10px 8px;
+  border-bottom: 1px solid #e9ecef;
+}
+
+tr:hover {
+  background-color: #f8f9fa;
+  cursor: pointer;
+}
+
+.ticker-cell {
+  font-weight: 600;
+  color: #007bff;
+}
+
+.call,
+.put {
+  font-weight: 600;
+}
+
+.call {
+  color: #28a745;
+}
+
+.put {
+  color: #dc3545;
+}
+
+.ratio {
+  font-weight: 600;
+  color: #0069d9;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
   }
-  to {
-    transform: rotate(360deg);
+
+  .ticker-lists {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  th,
+  td {
+    padding: 8px 4px;
+    font-size: 14px;
+  }
+
+  th:nth-child(6),
+  td:nth-child(6),
+  th:nth-child(7),
+  td:nth-child(7) {
+    display: none;
   }
 }
